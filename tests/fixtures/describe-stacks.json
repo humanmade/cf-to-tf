@@ -1,0 +1,48 @@
+{
+    "Stacks": [
+        {
+            "StackId": "arn:aws:cloudformation:eu-central-1:123456789012:stack/foobarbaz/255491f0-71b8-11e7-a154-500c52a6cefe",
+            "Description": "Human Made Hosting Stack [AMIv1] v2.2.0",
+            "Parameters": [
+                {
+                    "ParameterValue": "bar",
+                    "ParameterKey": "foo"
+                },
+                {
+                    "ParameterValue": "baz",
+                    "ParameterKey": "bar"
+                },
+                {
+                    "ParameterValue": "qux",
+                    "ParameterKey": "baz"
+
+                }
+            ],
+            "Tags": [
+                {
+                    "Value": "bar",
+                    "Key": "foo"
+                },
+                {
+                    "Value": "qux",
+                    "Key": "baz"
+                }
+            ],
+            "Outputs": [
+                {
+                    "Description": "Foobarbaz",
+                    "OutputKey": "FooBarBaz",
+                    "OutputValue": "output value"
+                }
+            ],
+            "CreationTime": "2017-07-26T04:08:57.266Z",
+            "Capabilities": [
+                "CAPABILITY_IAM"
+            ],
+            "StackName": "foobarbaz",
+            "NotificationARNs": [],
+            "StackStatus": "CREATE_COMPLETE",
+            "DisableRollback": true
+        }
+    ]
+}

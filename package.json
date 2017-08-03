@@ -1,0 +1,30 @@
+{
+  "name": "cf-to-tf",
+  "version": "0.0.1",
+  "description": "A cli tool to generate a Terraform CloudFormation resource and state from an existing CloudFormation stack",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test-watch": "jest --watch"
+  },
+  "bin": {
+    "cf-to-tf": "./index.js"
+  },
+  "keywords": [
+    "terraform",
+    "cloudformation"
+  ],
+  "author": "Nathaniel Schweinberg <nathaniel@hmn.md>",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.94.0",
+    "commander": "^2.11.0",
+    "node-fetch": "^1.7.1",
+    "winston": "^2.3.1"
+  },
+  "devDependencies": {
+    "aws-sdk-mock": "^1.7.0",
+    "jest": "^20.0.4",
+    "prettier": "^1.5.3"
+  }
+}

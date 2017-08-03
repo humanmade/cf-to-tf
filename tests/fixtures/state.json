@@ -1,0 +1,43 @@
+{
+    "version": 3,
+    "serial": 1,
+    "modules": [
+        {
+            "path": [
+                "root"
+            ],
+            "outputs": {},
+            "resources": {
+                "aws_cloudformation_stack.network": {
+                    "type": "aws_cloudformation_stack",
+                    "depends_on": [],
+                    "primary": {
+                        "id": "arn:aws:cloudformation:eu-central-1:123456789012:stack/foobarbaz/255491f0-71b8-11e7-a154-500c52a6cefe",
+                        "attributes": {
+                            "capabilities.#": "1",
+                            "capabilities.0": "CAPABILITY_IAM",
+                            "disable_rollback": "true",
+                            "iam_role_arn": "",
+                            "id": "arn:aws:cloudformation:eu-central-1:123456789012:stack/foobarbaz/255491f0-71b8-11e7-a154-500c52a6cefe",
+                            "name": "foobarbaz",
+                            "outputs.%": "1",
+                            "outputs.FooBarBaz": "output value",
+                            "parameters.%": "3",
+                            "parameters.foo": "bar",
+                            "parameters.bar": "baz",
+                            "parameters.baz": "qux",
+                            "tags.%": "2",
+                            "tags.baz": "qux",
+                            "tags.foo": "bar"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": ""
+                }
+            },
+            "depends_on": []
+        }
+    ]
+}
