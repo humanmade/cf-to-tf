@@ -22,15 +22,16 @@ Usage: cf-to-tf [options] [command]
 
 Options:
 
--s, --stack <stack>                 The CloudFormation stack to import
--r, --resource-name <resourceName>  The name to assign the terraform resource
--h, --help                          output usage information
+  -s, --stack <stack>                 The CloudFormation stack to import
+  -r, --resource-name <resourceName>  The name to assign the terraform resource
+  -h, --help                          output usage information
 
 
 Commands:
 
-config   Generates Terraform configuration in JSON
-state    Generates Terraform state file in JSON
+  config      Generates Terraform configuration in JSON
+  state       Generates Terraform state file in JSON
+  clean-hcl   Cleans generated HCL according to my preferences
 ```
 
 This tool is designed to be used in conjunction with other tools. It will only output the data to `STDOUT` and is designed to be piped to another program to write the file to a location. For example, to generate a configuration file for a stack named `lambda-resources`, we could do the following:
@@ -61,5 +62,13 @@ It's also possible to use a tool called [`json2hcl`](https://github.com/kvz/json
 ```
 cf-to-tf -s lambda-resources config | json2hcl | tee main.tf
 ```
+
+Unfortunately, while `json2hcl` outputs valid HCL, it's not in the format I like. To solve that problem, the `clean-hcl` command is also available. To output HCL in the format you'll normally see, you can execute this chain:
+
+```
+cf-to-tf -s lambda-resources config | json2hcl | cf-to-tf clean-hcl | terraform fmt - | tee main.tf
+```
+
+We're doing the same thing we were doing before, but now we're also piping the result to `cf-to-tf clean-hcl` which formats the file a certain way, then piping it to `terraform fmt -` which formats the file further (primarily, this tool aligns `=` and adds newlines where necessary).
 
 The command uses the AWS SDK under the hood to retrieve the CloudFormation stack details, so set your authentication credentials as you would normally (`~/.aws/credentials`, `AWS_PROFILE`, `AWS_REGION`, etc).
