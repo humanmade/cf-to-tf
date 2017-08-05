@@ -1,10 +1,14 @@
 resource "aws_cloudformation_stack" "network" {
-  capabilities = ["CAPABILITY_IAM"]
+  capabilities     = ["CAPABILITY_IAM"]
   disable_rollback = true
-  name = "foobarbaz"
+  name             = "foobarbaz"
   parameters = {
     foo = "bar"
     bar = "baz"
+    baz = "qux"
+  }
+  tags = {
+    foo = "bar"
     baz = "qux"
   }
 }

@@ -12,4 +12,10 @@
 
     "baz" = "qux"
   }
+
+  "tags" = {
+    "foo" = "bar"
+
+    "baz" = "qux"
+  }
 }

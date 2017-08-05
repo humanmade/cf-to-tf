@@ -16,6 +16,12 @@
                   "bar": "baz",
                   "baz": "qux"
                 }
+              ],
+              "tags": [
+                {
+                  "foo": "bar",
+                  "baz": "qux"
+                }
               ]
             }
         }
