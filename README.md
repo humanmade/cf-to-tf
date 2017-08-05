@@ -14,6 +14,88 @@ npm install -g
 
 From there, a `cf-to-tf` command will be available.
 
+### Recommended Dependencies
+
+As this was designed to generate Terraform resources, it'd be a good idea to install [`terraform`](https://www.terraform.io/intro/getting-started/install.html). You can install the binary by itself or use a tool like `brew` to manage it for you.
+
+It's also recommended to install [`json2hcl`](https://github.com/kvz/json2hcl) as this will assist in processing output from `cf-to-tf` later.
+
+## Demo
+
+Let's use the following CloudFormation Stack response as an example:
+```
+{
+    "Stacks": [
+        {
+            "StackId": "arn:aws:cloudformation:eu-central-1:123456789012:stack/foobarbaz/255491f0-71b8-11e7-a154-500c52a6cefe",
+            "Description": "FooBar Stack",
+            "Parameters": [
+                {
+                    "ParameterValue": "bar",
+                    "ParameterKey": "foo"
+                },
+                {
+                    "ParameterValue": "baz",
+                    "ParameterKey": "bar"
+                },
+                {
+                    "ParameterValue": "qux",
+                    "ParameterKey": "baz"
+
+                }
+            ],
+            "Tags": [
+                {
+                    "Value": "bar",
+                    "Key": "foo"
+                },
+                {
+                    "Value": "qux",
+                    "Key": "baz"
+                }
+            ],
+            "Outputs": [
+                {
+                    "Description": "Foobarbaz",
+                    "OutputKey": "FooBarBaz",
+                    "OutputValue": "output value"
+                }
+            ],
+            "CreationTime": "2017-07-26T04:08:57.266Z",
+            "Capabilities": [
+                "CAPABILITY_IAM"
+            ],
+            "StackName": "foobarbaz",
+            "NotificationARNs": [],
+            "StackStatus": "CREATE_COMPLETE",
+            "DisableRollback": true
+        }
+    ]
+}
+```
+
+Running `cf-to-tf --stack foobarbaz config | json2hcl | cf-to-tf clean-hcl | terraform fmt -` will generate the following config:
+
+```
+resource "aws_cloudformation_stack" "network" {
+  capabilities     = ["CAPABILITY_IAM"]
+  disable_rollback = true
+  name             = "foobarbaz"
+
+  parameters = {
+    foo = "bar"
+    bar = "baz"
+    baz = "qux"
+  }
+
+  tags = {
+    foo = "bar"
+    baz = "qux"
+  }
+}
+```
+
+
 ## Usage
 
 ```
