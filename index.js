@@ -4,6 +4,8 @@ const program = require('commander');
 const getStack = require('./lib/stack');
 const configuration = require('./lib/configuration');
 const state = require('./lib/state');
+const cleanHCL = require('./lib/cleanHCL');
+const getStdin = require('get-stdin');
 
 const formatOptions = opts => {
 	return {
@@ -49,9 +51,17 @@ program
 			.catch(err => handleError(err));
 	});
 
+program
+	.command('clean-hcl')
+	.description('Cleans generated HCL according to my preferences')
+	.action(options => {
+		const opts = formatOptions(options);
+		return getStdin()
+			.then(str => cleanHCL.clean(opts, str))
+			.then(result => console.log(result))
+			.catch(err => handleError(err));
+	});
+
 program.parse(process.argv);
 
 // TODO mark required arguments
-// TODO need to get cloudformation stack from AWS, then pass it to the
-// generator
-// TODO need to build a thing that will do things based on the args
