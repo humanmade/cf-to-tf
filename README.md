@@ -1,3 +1,25 @@
+<table width="100%">
+	<tr>
+		<td align="left" width="70">
+			<strong>CloudFormation to Terraform</strong><br />
+            A simple cli tool for generating Terraform configuration for existing CloudFormation templates.
+		</td>
+		<td align="right" width="20%">
+			<a href="https://travis-ci.org/humanmade/cf-to-tf">
+				<img src="https://travis-ci.org/humanmade/cf-to-tf.svg?branch=master" alt="Build status">
+			</a>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			A <strong><a href="https://hmn.md/">Human Made</a></strong> project. Maintained by @nathanielks.
+		</td>
+		<td align="center">
+			<img src="https://hmn.md/content/themes/hmnmd/assets/images/hm-logo.svg" width="100" />
+		</td>
+	</tr>
+</table>
+
 # CloudFormation to Terraform
 
 This node CLI tool is used for generating both Terraform configuration files as well as Terraform state so that you can use Terraform to manage CloudFormation templates. To further clarify, it does not generate terraform configuration for the individual resources CloudFormation provisions, it generates an `aws_cloudformation_stack` resource so that you can manage your existing CloudFormation stacks with Terraform instead of or in conjunction with the AWS Console and CLI.
