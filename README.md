@@ -1,6 +1,6 @@
 <table width="100%">
 	<tr>
-		<td align="left" width="70">
+		<td align="left" width="80%">
 			<strong>CloudFormation to Terraform</strong><br />
             A simple cli tool for generating Terraform configuration for existing CloudFormation templates.
 		</td>
@@ -11,7 +11,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td>
+		<td align="center">
 			A <strong><a href="https://hmn.md/">Human Made</a></strong> project. Maintained by @nathanielks.
 		</td>
 		<td align="center">
