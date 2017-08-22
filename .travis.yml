@@ -5,6 +5,9 @@ node_js:
 
 sudo: false
 
+before_install:
+  - npm install --global npm@5
+
 cache:
   directories:
     - "node_modules"
