@@ -1,0 +1,13 @@
+language: node_js
+
+node_js:
+  - "6"
+
+sudo: false
+
+cache:
+  directories:
+    - "node_modules"
+
+script:
+  - npm run test
