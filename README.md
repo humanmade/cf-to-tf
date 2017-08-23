@@ -175,4 +175,11 @@ cf-to-tf -s lambda-resources config | json2hcl | cf-to-tf clean-hcl | terraform 
 
 We're doing the same thing we were doing before, but now we're also piping the result to `cf-to-tf clean-hcl` which formats the file a certain way, then piping it to `terraform fmt -` which formats the file further (primarily, this tool aligns `=` and adds newlines where necessary).
 
+It's also possible to have `cf-to-tf` read stack data from `STDIN`. For example, if you have the JSON response from the `aws-cli` call stored in a variable for re-use, you can do the following:
+
+```
+JSON="$(aws cloudformation describe-stacks --stack-name lambda-resources)"
+echo "$JSON" | cf-to-tf -s - config
+```
+
 The command uses the AWS SDK under the hood to retrieve the CloudFormation stack details, so set your authentication credentials as you would normally (`~/.aws/credentials`, `AWS_PROFILE`, `AWS_REGION`, etc).
