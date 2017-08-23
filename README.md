@@ -4,7 +4,7 @@
 			<strong>CloudFormation to Terraform</strong><br />
             A simple cli tool for generating Terraform configuration for existing CloudFormation templates.
 		</td>
-		<td align="right" width="20%">
+		<td align="center" width="20%">
 			<a href="https://travis-ci.org/humanmade/cf-to-tf">
 				<img src="https://travis-ci.org/humanmade/cf-to-tf.svg?branch=master" alt="Build status">
 			</a>
