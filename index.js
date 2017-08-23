@@ -65,7 +65,7 @@ program
 			.then(result => {
 				return state.generate(opts, result.Stacks[0]);
 			})
-			.then(result => console.log(result))
+			.then(result => console.log(JSON.stringify(result)))
 			.catch(err => handleError(err));
 	});
 
