@@ -30,6 +30,18 @@ program
 	.description('Generates Terraform configuration in JSON')
 	.action(options => {
 		const opts = formatOptions(options);
+		return getStdin()
+			.then(result => {
+				if (result !== '' && opts.stack === '-') {
+					return JSON.parse(result);
+				}
+				return getStack(opts);
+			})
+			.then(result => {
+				return configuration.generate(opts, result.Stacks[0]);
+			})
+			.then(result => console.log(JSON.stringify(result)))
+			.catch(err => handleError(err));
 		return getStack(opts)
 			.then(result => {
 				return configuration.generate(opts, result.Stacks[0]);
@@ -43,7 +55,13 @@ program
 	.description('Generates Terraform state file in JSON')
 	.action(options => {
 		const opts = formatOptions(options);
-		return getStack(opts)
+		return getStdin()
+			.then(result => {
+				if (result !== '' && opts.stack === '-') {
+					return JSON.parse(result);
+				}
+				return getStack(opts);
+			})
 			.then(result => {
 				return state.generate(opts, result.Stacks[0]);
 			})
