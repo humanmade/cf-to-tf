@@ -10,5 +10,6 @@ resource "aws_cloudformation_stack" "network" {
   tags = {
     foo = "bar"
     baz = "qux"
+    "foo:bar" = "baz"
   }
 }

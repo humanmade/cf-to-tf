@@ -26,6 +26,10 @@
                 {
                     "Value": "qux",
                     "Key": "baz"
+                },
+                {
+                    "Value": "baz",
+                    "Key": "foo:bar"
                 }
             ],
             "Outputs": [

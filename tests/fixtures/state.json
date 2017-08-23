@@ -26,9 +26,10 @@
                             "parameters.foo": "bar",
                             "parameters.bar": "baz",
                             "parameters.baz": "qux",
-                            "tags.%": "2",
+                            "tags.%": "3",
                             "tags.baz": "qux",
-                            "tags.foo": "bar"
+                            "tags.foo": "bar",
+                            "tags.foo:bar": "baz"
                         },
                         "meta": {},
                         "tainted": false
