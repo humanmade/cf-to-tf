@@ -1,7 +1,11 @@
 const state = require('./../lib/state');
+const AWS = require('aws-sdk-mock');
 
 describe('', () => {
 	test('generate', () => {
+		AWS.mock('CloudFormation', 'getTemplate', {
+			TemplateBody: '{"mocked": true}',
+		});
 		const cf = require('./fixtures/describe-stacks.json');
 		const expected = require('./fixtures/state.json');
 		const opts = {
