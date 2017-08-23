@@ -22,15 +22,15 @@
                             "name": "foobarbaz",
                             "outputs.%": "1",
                             "outputs.FooBarBaz": "output value",
-                            "parameters.%": "4",
+                            "parameters.%": "3",
                             "parameters.foo": "bar",
                             "parameters.bar": "baz",
                             "parameters.baz": "qux",
-														"parameters.template_body": "{\"mocked\":true}",
                             "tags.%": "3",
                             "tags.baz": "qux",
                             "tags.foo": "bar",
-                            "tags.foo:bar": "baz"
+                            "tags.foo:bar": "baz",
+														"template_body": "{\"mocked\":true}"
                         },
                         "meta": {},
                         "tainted": false

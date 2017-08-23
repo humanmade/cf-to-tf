@@ -2,6 +2,7 @@
   "name": "cf-to-tf",
   "version": "0.0.1",
   "description": "A cli tool to generate a Terraform CloudFormation resource and state from an existing CloudFormation stack",
+	"repository": "humanmade/cf-to-tf",
   "main": "index.js",
   "scripts": {
     "test": "jest",
