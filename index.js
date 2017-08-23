@@ -1,7 +1,8 @@
 #!/usr/bin/env node --harmony
 
 const program = require('commander');
-const getStack = require('./lib/stack');
+const awsGetStack = require('./lib/stack');
+const awsGetTemplate = require('./lib/template');
 const configuration = require('./lib/configuration');
 const state = require('./lib/state');
 const cleanHCL = require('./lib/cleanHCL');
@@ -12,6 +13,17 @@ const formatOptions = opts => {
 		stack: opts.parent.stack,
 		resourceName: opts.parent.resourceName || 'main',
 	};
+};
+
+const getStack = opts => {
+	return getStdin().then(result => stdinOrGetStack(result, opts));
+};
+
+const stdinOrGetStack = (result, opts) => {
+	if (result !== '' && opts.stack === '-') {
+		return JSON.parse(result);
+	}
+	return awsGetStack(opts);
 };
 
 const handleError = err => {
@@ -30,13 +42,7 @@ program
 	.description('Generates Terraform configuration in JSON')
 	.action(options => {
 		const opts = formatOptions(options);
-		return getStdin()
-			.then(result => {
-				if (result !== '' && opts.stack === '-') {
-					return JSON.parse(result);
-				}
-				return getStack(opts);
-			})
+		return getStack(opts)
 			.then(result => {
 				return configuration.generate(opts, result.Stacks[0]);
 			})
@@ -55,16 +61,20 @@ program
 	.description('Generates Terraform state file in JSON')
 	.action(options => {
 		const opts = formatOptions(options);
-		return getStdin()
-			.then(result => {
-				if (result !== '' && opts.stack === '-') {
-					return JSON.parse(result);
-				}
-				return getStack(opts);
-			})
+		return getStack(opts)
 			.then(result => {
 				return state.generate(opts, result.Stacks[0]);
 			})
+			.then(result => console.log(result))
+			.catch(err => handleError(err));
+	});
+
+program
+	.command('template')
+	.description('Prints the CloudFormation Stack Template')
+	.action(options => {
+		const opts = formatOptions(options);
+		return awsGetTemplate(opts)
 			.then(result => console.log(JSON.stringify(result)))
 			.catch(err => handleError(err));
 	});
