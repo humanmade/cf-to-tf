@@ -183,3 +183,5 @@ echo "$JSON" | cf-to-tf -s - config
 ```
 
 The command uses the AWS SDK under the hood to retrieve the CloudFormation stack details, so set your authentication credentials as you would normally (`~/.aws/credentials`, `AWS_PROFILE`, `AWS_REGION`, etc).
+
+For an example of how to use this script in batch operations importing multiple stacks in multiple regions, refer to [this gist](https://gist.github.com/nathanielks/18fb57b906e41dbb7fff8a3f878c07c4).
