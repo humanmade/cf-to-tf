@@ -138,6 +138,8 @@ Commands:
   clean-hcl   Cleans generated HCL according to my preferences
 ```
 
+### Terraform JSON Files
+
 This tool is designed to be used in conjunction with other tools. It will only output the data to `STDOUT` and is designed to be piped to another program to write the file to a location. For example, to generate a configuration file for a stack named `lambda-resources`, we could do the following:
 
 ```
@@ -145,6 +147,8 @@ cf-to-tf -s lambda-resources config | tee main.tf.json
 ```
 
 This command will fetch a CloudFormation stack named `lambda-resources` and generate the required Terraform configuration for it. We then pipe the output to `tee` which will write to a file named `main.tf.json`. Because HCL is JSON compatible, Terraform can read the `main.tf.json` natively.
+
+### Terraform State
 
 To generate the associated Terraform state for this CloudFormation stack, you would run the following:
 
@@ -154,12 +158,16 @@ cf-to-tf -s lambda-resources state | tee terraform.tfstate
 
 This will create a state file from scratch. It assumes you don't already have an existing state file in place. I'm considering updating the tool to write just the resource portion of the state so it can be added to an existing state file, but that wasn't an immediate priority.
 
+### Pretty Printing
+
 Both of these commands will generate compressed JSON output, meaning whitespace has been stripped. To pretty print the output for enhanced readability, you could pipe the output to `jq`, and then to `tee`:
 
 ```
 cf-to-tf -s lambda-resources config | jq '.' | tee main.tf.json
 cf-to-tf -s lambda-resources state | jq '.' | tee terraform.tfstate
 ```
+
+### Generating HCL
 
 It's also possible to use a tool called [`json2hcl`](https://github.com/kvz/json2hcl) to generate HCL:
 
@@ -175,6 +183,8 @@ cf-to-tf -s lambda-resources config | json2hcl | cf-to-tf clean-hcl | terraform 
 
 We're doing the same thing we were doing before, but now we're also piping the result to `cf-to-tf clean-hcl` which formats the file a certain way, then piping it to `terraform fmt -` which formats the file further (primarily, this tool aligns `=` and adds newlines where necessary).
 
+### Reading from STDIN
+
 It's also possible to have `cf-to-tf` read stack data from `STDIN`. For example, if you have the JSON response from the `aws-cli` call stored in a variable for re-use, you can do the following:
 
 ```
@@ -182,6 +192,10 @@ JSON="$(aws cloudformation describe-stacks --stack-name lambda-resources)"
 echo "$JSON" | cf-to-tf -s - config
 ```
 
+### AWS Authentication
+
 The command uses the AWS SDK under the hood to retrieve the CloudFormation stack details, so set your authentication credentials as you would normally (`~/.aws/credentials`, `AWS_PROFILE`, `AWS_REGION`, etc).
 
-For an example of how to use this script in batch operations importing multiple stacks in multiple regions, refer to [this gist](https://gist.github.com/nathanielks/18fb57b906e41dbb7fff8a3f878c07c4).
+### Batch Import scripts
+
+For an example of how to use this script in batch operations importing multiple stacks in multiple regions, refer to [this gist](https://gist.github.com/nathanielks/9282d59ab065f8ee0e373ca7199df085).
