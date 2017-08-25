@@ -1,6 +1,6 @@
 {
   "name": "cf-to-tf",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A cli tool to generate a Terraform CloudFormation resource and state from an existing CloudFormation stack",
 	"repository": "humanmade/cf-to-tf",
   "main": "index.js",
@@ -16,13 +16,11 @@
     "cloudformation"
   ],
   "author": "Nathaniel Schweinberg <nathaniel@hmn.md>",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "aws-sdk": "^2.94.0",
     "commander": "^2.11.0",
-    "get-stdin": "^5.0.1",
-    "node-fetch": "^1.7.1",
-    "winston": "^2.3.1"
+    "get-stdin": "^5.0.1"
   },
   "devDependencies": {
     "aws-sdk-mock": "^1.7.0",
