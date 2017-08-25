@@ -135,6 +135,7 @@ Commands:
 
   config      Generates Terraform configuration in JSON
   state       Generates Terraform state file in JSON
+  template    Prints the CloudFormation Stack Template
   clean-hcl   Cleans generated HCL according to my preferences
 ```
 
