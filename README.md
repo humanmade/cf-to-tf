@@ -26,15 +26,9 @@ This node CLI tool is used for generating both Terraform configuration files as 
 
 ## Getting Started
 
-As this repo isn't published to NPM yet, you will need to clone the repo locally and install it globally:
-
 ```
-git clone git@github.com:humanmade/cf-to-tf.git cf-to-tf
-cd cf-to-tf
-npm install -g
+npm i -g cf-to-tf
 ```
-
-From there, a `cf-to-tf` command will be available.
 
 ### Recommended Dependencies
 

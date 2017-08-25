@@ -1,5 +1,5 @@
 {
-  "name": "cf-to-tf",
+  "name": "@humanmade/cf-to-tf",
   "version": "0.1.0",
   "description": "A cli tool to generate a Terraform CloudFormation resource and state from an existing CloudFormation stack",
 	"repository": "humanmade/cf-to-tf",
