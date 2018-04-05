@@ -27,7 +27,7 @@ This node CLI tool is used for generating both Terraform configuration files as 
 ## Getting Started
 
 ```
-npm i -g cf-to-tf
+npm i -g @humanmade/cf-to-tf
 ```
 
 ### Recommended Dependencies
