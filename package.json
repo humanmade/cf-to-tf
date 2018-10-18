@@ -2,7 +2,7 @@
   "name": "@humanmade/cf-to-tf",
   "version": "0.1.1",
   "description": "A cli tool to generate a Terraform CloudFormation resource and state from an existing CloudFormation stack",
-	"repository": "humanmade/cf-to-tf",
+  "repository": "humanmade/cf-to-tf",
   "main": "index.js",
   "scripts": {
     "test": "jest",
@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "aws-sdk-mock": "^1.7.0",
-    "jest": "^20.0.4",
+    "jest": "^23.6.0",
     "prettier": "^1.5.3"
   }
 }
