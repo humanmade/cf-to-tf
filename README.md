@@ -38,7 +38,7 @@ It's also recommended to install [`json2hcl`](https://github.com/kvz/json2hcl) a
 
 ## Demo
 
-Let's use the following CloudFormation Stack response as an example:
+Let's use the following CloudFormation Stack response as an example (available as `sample_response.json` in this repository):
 ```
 {
     "Stacks": [
@@ -90,7 +90,7 @@ Let's use the following CloudFormation Stack response as an example:
 }
 ```
 
-Running `cf-to-tf --stack foobarbaz config | json2hcl | cf-to-tf clean-hcl | terraform fmt -` will generate the following config:
+Running `cf-to-tf --stack - config < sample_response.json | json2hcl | cf-to-tf clean-hcl | terraform fmt -` will generate the following config:
 
 ```
 resource "aws_cloudformation_stack" "network" {
