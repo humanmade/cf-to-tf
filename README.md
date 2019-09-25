@@ -38,7 +38,7 @@ It's also recommended to install [`json2hcl`](https://github.com/kvz/json2hcl) a
 
 ## Demo
 
-Let's use the following CloudFormation Stack response as an example:
+Let's use the following CloudFormation Stack response as an example (available as `sample_response.json` in this repository):
 ```
 {
     "Stacks": [
@@ -90,7 +90,7 @@ Let's use the following CloudFormation Stack response as an example:
 }
 ```
 
-Running `cf-to-tf --stack foobarbaz config | json2hcl | cf-to-tf clean-hcl | terraform fmt -` will generate the following config:
+Running `cf-to-tf --stack - config < sample_response.json | json2hcl | cf-to-tf clean-hcl | terraform fmt -` will generate the following config:
 
 ```
 resource "aws_cloudformation_stack" "network" {
@@ -120,7 +120,7 @@ Usage: cf-to-tf [options] [command]
 
 Options:
 
-  -s, --stack <stack>                 The CloudFormation stack to import
+  -s, --stack <stack>                 The name of the CloudFormation stack to import
   -r, --resource-name <resourceName>  The name to assign the terraform resource
   -h, --help                          output usage information
 
@@ -135,7 +135,7 @@ Commands:
 
 ### Terraform JSON Files
 
-This tool is designed to be used in conjunction with other tools. It will only output the data to `STDOUT` and is designed to be piped to another program to write the file to a location. For example, to generate a configuration file for a stack named `lambda-resources`, we could do the following:
+This tool is designed to be used in conjunction with other tools. It will only output the data to `STDOUT` and is designed to be piped to another program to write the file to a location. For example, to generate a configuration file for a deployed CloudFormation stack named `lambda-resources`, we could do the following:
 
 ```
 cf-to-tf -s lambda-resources config | tee main.tf.json
@@ -180,7 +180,7 @@ We're doing the same thing we were doing before, but now we're also piping the r
 
 ### Reading from STDIN
 
-It's also possible to have `cf-to-tf` read stack data from `STDIN`. For example, if you have the JSON response from the `aws-cli` call stored in a variable for re-use, you can do the following:
+`cf-to-tf` expects to fetch a CloudFormation stack from AWS, but it's also possible to have `cf-to-tf` read stack data from `STDIN`. For example, if you have the JSON response from the `aws-cli` call stored in a variable for re-use, you can do the following:
 
 ```
 JSON="$(aws cloudformation describe-stacks --stack-name lambda-resources)"
@@ -189,7 +189,7 @@ echo "$JSON" | cf-to-tf -s - config
 
 ### AWS Authentication
 
-The command uses the AWS SDK under the hood to retrieve the CloudFormation stack details, so set your authentication credentials as you would normally (`~/.aws/credentials`, `AWS_PROFILE`, `AWS_REGION`, etc).
+The command uses the AWS SDK under the hood to retrieve the CloudFormation stack details, so set your authentication credentials as you would normally (`~/.aws/credentials`, `AWS_PROFILE`, `AWS_REGION`, etc). See https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html for more details.
 
 ### Batch Import scripts
 
